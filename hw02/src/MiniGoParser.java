@@ -1,16 +1,12 @@
 // Generated from /Users/Kyle/Documents/Git/2018_Second_Compiler/hw02/src/MiniGo.g4 by ANTLR 4.7
-
-import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.atn.ATN;
-import org.antlr.v4.runtime.atn.ATNDeserializer;
-import org.antlr.v4.runtime.atn.ParserATNSimulator;
-import org.antlr.v4.runtime.atn.PredictionContextCache;
+import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
-import org.antlr.v4.runtime.tree.ParseTreeListener;
-import org.antlr.v4.runtime.tree.ParseTreeVisitor;
-import org.antlr.v4.runtime.tree.TerminalNode;
-
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.misc.*;
+import org.antlr.v4.runtime.tree.*;
 import java.util.List;
+import java.util.Iterator;
+import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class MiniGoParser extends Parser {
@@ -119,11 +115,6 @@ public class MiniGoParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof MiniGoListener ) ((MiniGoListener)listener).exitProgram(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniGoVisitor ) return ((MiniGoVisitor<? extends T>)visitor).visitProgram(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ProgramContext program() throws RecognitionException {
@@ -147,7 +138,7 @@ public class MiniGoParser extends Parser {
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==VAR || _la==FUNC );
-			System.out.println("201504278 Rule 0");
+			System.out.println("201504278 Rule 0 program");
 			}
 		}
 		catch (RecognitionException re) {
@@ -180,11 +171,6 @@ public class MiniGoParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof MiniGoListener ) ((MiniGoListener)listener).exitDecl(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniGoVisitor ) return ((MiniGoVisitor<? extends T>)visitor).visitDecl(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final DeclContext decl() throws RecognitionException {
@@ -199,7 +185,7 @@ public class MiniGoParser extends Parser {
 				{
 				setState(43);
 				var_decl();
-				System.out.println("201504278 Rule 1-0");
+				System.out.println("201504278 Rule 1-0 var_decl");
 				}
 				break;
 			case FUNC:
@@ -207,7 +193,7 @@ public class MiniGoParser extends Parser {
 				{
 				setState(46);
 				fun_decl();
-				System.out.println("201504278 Rule 1-1");
+				System.out.println("201504278 Rule 1-1 fun_decl");
 				}
 				break;
 			default:
@@ -246,11 +232,6 @@ public class MiniGoParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof MiniGoListener ) ((MiniGoListener)listener).exitVar_decl(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniGoVisitor ) return ((MiniGoVisitor<? extends T>)visitor).visitVar_decl(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Var_declContext var_decl() throws RecognitionException {
@@ -269,7 +250,7 @@ public class MiniGoParser extends Parser {
 				match(IDENT);
 				setState(53);
 				type_spec();
-				System.out.println("201504278 Rule 2-0");
+				System.out.println("201504278 Rule 2-0 dec_spec IDENT type_spec");
 				}
 				break;
 			case 2:
@@ -285,7 +266,7 @@ public class MiniGoParser extends Parser {
 				match(T__0);
 				setState(60);
 				match(LITERAL);
-				System.out.println("201504278 Rule 2-1");
+				System.out.println("201504278 Rule 2-1 dec_spec IDENT type_spec '=' LITERAL");
 				}
 				break;
 			case 3:
@@ -303,7 +284,7 @@ public class MiniGoParser extends Parser {
 				match(T__2);
 				setState(68);
 				type_spec();
-				System.out.println("201504278 Rule 2-2");
+				System.out.println("201504278 Rule 2-2 dec_spec IDENT '[' LITERAL ']' type_spec");
 				}
 				break;
 			}
@@ -333,11 +314,6 @@ public class MiniGoParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof MiniGoListener ) ((MiniGoListener)listener).exitDec_spec(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniGoVisitor ) return ((MiniGoVisitor<? extends T>)visitor).visitDec_spec(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Dec_specContext dec_spec() throws RecognitionException {
@@ -348,7 +324,7 @@ public class MiniGoParser extends Parser {
 			{
 			setState(73);
 			match(VAR);
-			System.out.println("201504278 Rule 3");
+			System.out.println("201504278 Rule 3 VAR");
 			}
 		}
 		catch (RecognitionException re) {
@@ -376,11 +352,6 @@ public class MiniGoParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof MiniGoListener ) ((MiniGoListener)listener).exitType_spec(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniGoVisitor ) return ((MiniGoVisitor<? extends T>)visitor).visitType_spec(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Type_specContext type_spec() throws RecognitionException {
@@ -395,7 +366,7 @@ public class MiniGoParser extends Parser {
 				{
 				setState(76);
 				match(INT);
-				System.out.println("201504278 Rule 4-0");
+				System.out.println("201504278 Rule 4-0 INT");
 				}
 				break;
 			case EOF:
@@ -420,7 +391,7 @@ public class MiniGoParser extends Parser {
 			case LITERAL:
 				enterOuterAlt(_localctx, 2);
 				{
-				System.out.println("201504278 Rule 4-1");
+				System.out.println("201504278 Rule 4-1 e");
 				}
 				break;
 			default:
@@ -465,11 +436,6 @@ public class MiniGoParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof MiniGoListener ) ((MiniGoListener)listener).exitFun_decl(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniGoVisitor ) return ((MiniGoVisitor<? extends T>)visitor).visitFun_decl(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Fun_declContext fun_decl() throws RecognitionException {
@@ -496,7 +462,7 @@ public class MiniGoParser extends Parser {
 				type_spec();
 				setState(87);
 				compound_stmt();
-				System.out.println("201504278 Rule 5-0");
+				System.out.println("201504278 Rule 5-0 FUNC IDENT '(' params ')' type_spec compound_stmt");
 				}
 				break;
 			case 2:
@@ -524,7 +490,7 @@ public class MiniGoParser extends Parser {
 				match(T__4);
 				setState(100);
 				compound_stmt();
-				System.out.println("201504278 Rule 5-1");
+				System.out.println("201504278 Rule 5-1 FUNC IDENT '(' params ')' '(' type_spec ',' type_spec ')' compound_stmt");
 				}
 				break;
 			}
@@ -559,11 +525,6 @@ public class MiniGoParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof MiniGoListener ) ((MiniGoListener)listener).exitParams(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniGoVisitor ) return ((MiniGoVisitor<? extends T>)visitor).visitParams(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ParamsContext params() throws RecognitionException {
@@ -595,13 +556,13 @@ public class MiniGoParser extends Parser {
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				System.out.println("201504278 Rule 6-0");
+				System.out.println("201504278 Rule 6-0 param(',' param)*");
 				}
 				break;
 			case T__4:
 				enterOuterAlt(_localctx, 2);
 				{
-				System.out.println("201504278 Rule 6-1");
+				System.out.println("201504278 Rule 6-1 e");
 				}
 				break;
 			default:
@@ -636,11 +597,6 @@ public class MiniGoParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof MiniGoListener ) ((MiniGoListener)listener).exitParam(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniGoVisitor ) return ((MiniGoVisitor<? extends T>)visitor).visitParam(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ParamContext param() throws RecognitionException {
@@ -655,7 +611,7 @@ public class MiniGoParser extends Parser {
 				{
 				setState(118);
 				match(IDENT);
-				System.out.println("201504278 Rule 7-0");
+				System.out.println("201504278 Rule 7-0 IDENT");
 				}
 				break;
 			case 2:
@@ -665,7 +621,7 @@ public class MiniGoParser extends Parser {
 				match(IDENT);
 				setState(121);
 				type_spec();
-				System.out.println("201504278 Rule 7-1");
+				System.out.println("201504278 Rule 7-1 IDENT type_spec");
 				}
 				break;
 			}
@@ -709,11 +665,6 @@ public class MiniGoParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof MiniGoListener ) ((MiniGoListener)listener).exitStmt(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniGoVisitor ) return ((MiniGoVisitor<? extends T>)visitor).visitStmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final StmtContext stmt() throws RecognitionException {
@@ -736,7 +687,7 @@ public class MiniGoParser extends Parser {
 				{
 				setState(126);
 				expr_stmt();
-				System.out.println("201504278 Rule 8-0");
+				System.out.println("201504278 Rule 8-0 expr_stmt");
 				}
 				break;
 			case T__6:
@@ -744,7 +695,7 @@ public class MiniGoParser extends Parser {
 				{
 				setState(129);
 				compound_stmt();
-				System.out.println("201504278 Rule 8-1");
+				System.out.println("201504278 Rule 8-1 compound_stmt");
 				}
 				break;
 			case IF:
@@ -752,7 +703,7 @@ public class MiniGoParser extends Parser {
 				{
 				setState(132);
 				if_stmt();
-				System.out.println("201504278 Rule 8-2");
+				System.out.println("201504278 Rule 8-2 if_stmt");
 				}
 				break;
 			case FOR:
@@ -760,7 +711,7 @@ public class MiniGoParser extends Parser {
 				{
 				setState(135);
 				for_stmt();
-				System.out.println("201504278 Rule 8-3");
+				System.out.println("201504278 Rule 8-3 for_stmt");
 				}
 				break;
 			case RETURN:
@@ -768,7 +719,7 @@ public class MiniGoParser extends Parser {
 				{
 				setState(138);
 				return_stmt();
-				System.out.println("201504278 Rule 8-4");
+				System.out.println("201504278 Rule 8-4 return_stmt");
 				}
 				break;
 			default:
@@ -802,11 +753,6 @@ public class MiniGoParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof MiniGoListener ) ((MiniGoListener)listener).exitExpr_stmt(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniGoVisitor ) return ((MiniGoVisitor<? extends T>)visitor).visitExpr_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Expr_stmtContext expr_stmt() throws RecognitionException {
@@ -817,7 +763,7 @@ public class MiniGoParser extends Parser {
 			{
 			setState(143);
 			expr(0);
-			System.out.println("201504278 Rule 9");
+			System.out.println("201504278 Rule 9 expr");
 			}
 		}
 		catch (RecognitionException re) {
@@ -854,11 +800,6 @@ public class MiniGoParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof MiniGoListener ) ((MiniGoListener)listener).exitFor_stmt(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniGoVisitor ) return ((MiniGoVisitor<? extends T>)visitor).visitFor_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final For_stmtContext for_stmt() throws RecognitionException {
@@ -877,7 +818,7 @@ public class MiniGoParser extends Parser {
 				loop_expr();
 				setState(148);
 				stmt();
-				System.out.println("201504278 Rule 10-0");
+				System.out.println("201504278 Rule 10-0 FOR loop_expr stmt");
 				}
 				break;
 			case 2:
@@ -889,7 +830,7 @@ public class MiniGoParser extends Parser {
 				expr(0);
 				setState(153);
 				stmt();
-				System.out.println("201504278 Rule 10-1");
+				System.out.println("201504278 Rule 10-1 FOR expr stmt");
 				}
 				break;
 			}
@@ -929,11 +870,6 @@ public class MiniGoParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof MiniGoListener ) ((MiniGoListener)listener).exitCompound_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniGoVisitor ) return ((MiniGoVisitor<? extends T>)visitor).visitCompound_stmt(this);
-			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -976,7 +912,7 @@ public class MiniGoParser extends Parser {
 			}
 			setState(171);
 			match(T__7);
-			System.out.println("201504278 Rule 11");
+			System.out.println("201504278 Rule 11 '{' local_decl* stmt* '}'");
 			}
 		}
 		catch (RecognitionException re) {
@@ -1011,11 +947,6 @@ public class MiniGoParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof MiniGoListener ) ((MiniGoListener)listener).exitLocal_decl(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniGoVisitor ) return ((MiniGoVisitor<? extends T>)visitor).visitLocal_decl(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Local_declContext local_decl() throws RecognitionException {
@@ -1034,7 +965,7 @@ public class MiniGoParser extends Parser {
 				match(IDENT);
 				setState(176);
 				type_spec();
-				System.out.println("201504278 Rule 12-0");
+				System.out.println("201504278 Rule 12-0 dec_spec IDENT type_spec");
 				}
 				break;
 			case 2:
@@ -1050,7 +981,7 @@ public class MiniGoParser extends Parser {
 				match(T__0);
 				setState(183);
 				match(LITERAL);
-				System.out.println("201504278 Rule 12-1");
+				System.out.println("201504278 Rule 12-1 dec_spec IDENT type_spec '=' LITERAL");
 				}
 				break;
 			case 3:
@@ -1068,7 +999,7 @@ public class MiniGoParser extends Parser {
 				match(T__2);
 				setState(191);
 				type_spec();
-				System.out.println("201504278 Rule 12-2");
+				System.out.println("201504278 Rule 12-2 dec_spec IDENT '[' LITERAL ']' type_spec");
 				}
 				break;
 			}
@@ -1108,11 +1039,6 @@ public class MiniGoParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof MiniGoListener ) ((MiniGoListener)listener).exitIf_stmt(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniGoVisitor ) return ((MiniGoVisitor<? extends T>)visitor).visitIf_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final If_stmtContext if_stmt() throws RecognitionException {
@@ -1131,7 +1057,7 @@ public class MiniGoParser extends Parser {
 				expr(0);
 				setState(198);
 				stmt();
-				System.out.println("201504278 Rule 13-0");
+				System.out.println("201504278 Rule 13-0 IF expr stmt");
 				}
 				break;
 			case 2:
@@ -1147,7 +1073,7 @@ public class MiniGoParser extends Parser {
 				match(ELSE);
 				setState(205);
 				stmt();
-				System.out.println("201504278 Rule 13-1");
+				System.out.println("201504278 Rule 13-1 IF expr stmt ELSE stmt");
 				}
 				break;
 			}
@@ -1183,11 +1109,6 @@ public class MiniGoParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof MiniGoListener ) ((MiniGoListener)listener).exitReturn_stmt(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniGoVisitor ) return ((MiniGoVisitor<? extends T>)visitor).visitReturn_stmt(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Return_stmtContext return_stmt() throws RecognitionException {
@@ -1202,31 +1123,31 @@ public class MiniGoParser extends Parser {
 				{
 				setState(210);
 				match(RETURN);
-				System.out.println("201504278 Rule 14-0");
+				setState(211);
+				expr(0);
+				System.out.println("201504278 Rule 14-0 RETURN expr");
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(212);
+				setState(214);
 				match(RETURN);
-				setState(213);
+				setState(215);
 				expr(0);
-				System.out.println("201504278 Rule 14-1");
+				setState(216);
+				match(T__5);
+				setState(217);
+				expr(0);
+				System.out.println("201504278 Rule 14-1 RETURN expr ',' expr");
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(216);
+				setState(220);
 				match(RETURN);
-				setState(217);
-				expr(0);
-				setState(218);
-				match(T__5);
-				setState(219);
-				expr(0);
-				System.out.println("201504278 Rule 14-2");
+				System.out.println("201504278 Rule 14-2 RETURN");
 				}
 				break;
 			}
@@ -1261,11 +1182,6 @@ public class MiniGoParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof MiniGoListener ) ((MiniGoListener)listener).exitLoop_expr(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniGoVisitor ) return ((MiniGoVisitor<? extends T>)visitor).visitLoop_expr(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final Loop_exprContext loop_expr() throws RecognitionException {
@@ -1295,7 +1211,7 @@ public class MiniGoParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-			System.out.println("201504278 Rule 15");
+			System.out.println("201504278 Rule 15 expr ';' expr ';' expr ('++'|'--')");
 			}
 		}
 		catch (RecognitionException re) {
@@ -1343,11 +1259,6 @@ public class MiniGoParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof MiniGoListener ) ((MiniGoListener)listener).exitExpr(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniGoVisitor ) return ((MiniGoVisitor<? extends T>)visitor).visitExpr(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ExprContext expr() throws RecognitionException {
@@ -1381,7 +1292,7 @@ public class MiniGoParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				System.out.println("201504278 Rule 16-0");
+				System.out.println("201504278 Rule 16-0 (LITERAL|IDENT)");
 				}
 				break;
 			case 2:
@@ -1392,7 +1303,7 @@ public class MiniGoParser extends Parser {
 				expr(0);
 				setState(237);
 				match(T__4);
-				System.out.println("201504278 Rule 16-1");
+				System.out.println("201504278 Rule 16-1 '(' expr ')'");
 				}
 				break;
 			case 3:
@@ -1405,7 +1316,7 @@ public class MiniGoParser extends Parser {
 				expr(0);
 				setState(243);
 				match(T__2);
-				System.out.println("201504278 Rule 16-2");
+				System.out.println("201504278 Rule 16-2 IDENT '[' expr ']'");
 				}
 				break;
 			case 4:
@@ -1418,7 +1329,7 @@ public class MiniGoParser extends Parser {
 				args();
 				setState(249);
 				match(T__4);
-				System.out.println("201504278 Rule 16-3");
+				System.out.println("201504278 Rule 16-3 IDENT '(' args ')'");
 				}
 				break;
 			case 5:
@@ -1435,7 +1346,7 @@ public class MiniGoParser extends Parser {
 				args();
 				setState(257);
 				match(T__4);
-				System.out.println("201504278 Rule 16-4");
+				System.out.println("201504278 Rule 16-4 FMT '.' IDENT '(' args ')'");
 				}
 				break;
 			case 6:
@@ -1453,7 +1364,7 @@ public class MiniGoParser extends Parser {
 				}
 				setState(261);
 				expr(6);
-				System.out.println("201504278 Rule 16-5");
+				System.out.println("201504278 Rule 16-5 op=('-'|'+'|'--'|'++'|'!') expr");
 				}
 				break;
 			case 7:
@@ -1464,7 +1375,7 @@ public class MiniGoParser extends Parser {
 				match(T__0);
 				setState(266);
 				expr(2);
-				System.out.println("201504278 Rule 16-9");
+				System.out.println("201504278 Rule 16-9 IDENT '=' expr");
 				}
 				break;
 			case 8:
@@ -1481,7 +1392,7 @@ public class MiniGoParser extends Parser {
 				match(T__0);
 				setState(274);
 				expr(1);
-				System.out.println("201504278 Rule 16-9");
+				System.out.println("201504278 Rule 16-10 IDENT '[' expr ']' '=' expr");
 				}
 				break;
 			}
@@ -1489,7 +1400,7 @@ public class MiniGoParser extends Parser {
 			setState(296);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,17,_ctx);
-			while ( _alt!=2 && _alt!=ATN.INVALID_ALT_NUMBER ) {
+			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
@@ -1518,7 +1429,7 @@ public class MiniGoParser extends Parser {
 						}
 						setState(281);
 						((ExprContext)_localctx).right = expr(6);
-						System.out.println("201504278 Rule 16-6");
+						System.out.println("201504278 Rule 16-6 left=expr op=('*'|'/') right=expr");
 						}
 						break;
 					case 2:
@@ -1542,7 +1453,7 @@ public class MiniGoParser extends Parser {
 						}
 						setState(286);
 						((ExprContext)_localctx).right = expr(5);
-						System.out.println("201504278 Rule 16-7");
+						System.out.println("201504278 Rule 16-7 left=expr op=('%'|'+'|'-') right=expr");
 						}
 						break;
 					case 3:
@@ -1566,7 +1477,7 @@ public class MiniGoParser extends Parser {
 						}
 						setState(291);
 						((ExprContext)_localctx).right = expr(4);
-						System.out.println("201504278 Rule 16-8");
+						System.out.println("201504278 Rule 16-8 left=expr op=(EQ|NE|LE|'<'|GE|'>'|AND|OR) right=expr");
 						}
 						break;
 					}
@@ -1608,11 +1519,6 @@ public class MiniGoParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof MiniGoListener ) ((MiniGoListener)listener).exitArgs(this);
 		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniGoVisitor ) return ((MiniGoVisitor<? extends T>)visitor).visitArgs(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ArgsContext args() throws RecognitionException {
@@ -1652,13 +1558,13 @@ public class MiniGoParser extends Parser {
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				System.out.println("201504278 Rule 17-0");
+				System.out.println("201504278 Rule 17-0 expr (',' expr) * ");
 				}
 				break;
 			case T__4:
 				enterOuterAlt(_localctx, 2);
 				{
-				System.out.println("201504278 Rule 17-1");
+				System.out.println("201504278 Rule 17-1 e");
 				}
 				break;
 			default:
@@ -1766,11 +1672,11 @@ public class MiniGoParser extends Parser {
 		"\u00d3\3\2\2\2\u00cb\u00cc\7\34\2\2\u00cc\u00cd\5\"\22\2\u00cd\u00ce\5"+
 		"\22\n\2\u00ce\u00cf\7\35\2\2\u00cf\u00d0\5\22\n\2\u00d0\u00d1\b\17\1\2"+
 		"\u00d1\u00d3\3\2\2\2\u00d2\u00c6\3\2\2\2\u00d2\u00cb\3\2\2\2\u00d3\35"+
-		"\3\2\2\2\u00d4\u00d5\7\36\2\2\u00d5\u00e1\b\20\1\2\u00d6\u00d7\7\36\2"+
-		"\2\u00d7\u00d8\5\"\22\2\u00d8\u00d9\b\20\1\2\u00d9\u00e1\3\2\2\2\u00da"+
-		"\u00db\7\36\2\2\u00db\u00dc\5\"\22\2\u00dc\u00dd\7\b\2\2\u00dd\u00de\5"+
-		"\"\22\2\u00de\u00df\b\20\1\2\u00df\u00e1\3\2\2\2\u00e0\u00d4\3\2\2\2\u00e0"+
-		"\u00d6\3\2\2\2\u00e0\u00da\3\2\2\2\u00e1\37\3\2\2\2\u00e2\u00e3\5\"\22"+
+		"\3\2\2\2\u00d4\u00d5\7\36\2\2\u00d5\u00d6\5\"\22\2\u00d6\u00d7\b\20\1"+
+		"\2\u00d7\u00e1\3\2\2\2\u00d8\u00d9\7\36\2\2\u00d9\u00da\5\"\22\2\u00da"+
+		"\u00db\7\b\2\2\u00db\u00dc\5\"\22\2\u00dc\u00dd\b\20\1\2\u00dd\u00e1\3"+
+		"\2\2\2\u00de\u00df\7\36\2\2\u00df\u00e1\b\20\1\2\u00e0\u00d4\3\2\2\2\u00e0"+
+		"\u00d8\3\2\2\2\u00e0\u00de\3\2\2\2\u00e1\37\3\2\2\2\u00e2\u00e3\5\"\22"+
 		"\2\u00e3\u00e4\7\13\2\2\u00e4\u00e5\5\"\22\2\u00e5\u00e6\7\13\2\2\u00e6"+
 		"\u00e7\5\"\22\2\u00e7\u00e8\t\2\2\2\u00e8\u00e9\b\21\1\2\u00e9!\3\2\2"+
 		"\2\u00ea\u00eb\b\22\1\2\u00eb\u00ec\t\3\2\2\u00ec\u0118\b\22\1\2\u00ed"+

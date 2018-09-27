@@ -1,11 +1,12 @@
 // Generated from /Users/Kyle/Documents/Git/2018_Second_Compiler/hw02/src/MiniGo.g4 by ANTLR 4.7
-
+import org.antlr.v4.runtime.Lexer;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.atn.ATN;
-import org.antlr.v4.runtime.atn.ATNDeserializer;
-import org.antlr.v4.runtime.atn.LexerATNSimulator;
-import org.antlr.v4.runtime.atn.PredictionContextCache;
+import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
+import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class MiniGoLexer extends Lexer {
@@ -175,161 +176,161 @@ public class MiniGoLexer extends Lexer {
 	private void VAR_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 0:
-			System.out.println("201504278 Rule 18");
+			System.out.println("201504278 Rule 18 'var'");
 			break;
 		}
 	}
 	private void FUNC_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 1:
-			System.out.println("201504278 Rule 19");
+			System.out.println("201504278 Rule 19 'func'");
 			break;
 		}
 	}
 	private void FMT_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 2:
-			System.out.println("201504278 Rule 20");
+			System.out.println("201504278 Rule 20 'fmt'");
 			break;
 		}
 	}
 	private void INT_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 3:
-			System.out.println("201504278 Rule 21");
+			System.out.println("201504278 Rule 21 'int'");
 			break;
 		}
 	}
 	private void FOR_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 4:
-			System.out.println("201504278 Rule 22");
+			System.out.println("201504278 Rule 22 'for'");
 			break;
 		}
 	}
 	private void IF_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 5:
-			System.out.println("201504278 Rule 23");
+			System.out.println("201504278 Rule 23 'if'");
 			break;
 		}
 	}
 	private void ELSE_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 6:
-			System.out.println("201504278 Rule 24");
+			System.out.println("201504278 Rule 24 'else'");
 			break;
 		}
 	}
 	private void RETURN_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 7:
-			System.out.println("201504278 Rule 25");
+			System.out.println("201504278 Rule 25 'return'");
 			break;
 		}
 	}
 	private void OR_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 8:
-			System.out.println("201504278 Rule 26");
+			System.out.println("201504278 Rule 26 'or'");
 			break;
 		}
 	}
 	private void AND_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 9:
-			System.out.println("201504278 Rule 27");
+			System.out.println("201504278 Rule 27 'and'");
 			break;
 		}
 	}
 	private void LE_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 10:
-			System.out.println("201504278 Rule 28");
+			System.out.println("201504278 Rule 28 '<='");
 			break;
 		}
 	}
 	private void GE_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 11:
-			System.out.println("201504278 Rule 29");
+			System.out.println("201504278 Rule 29 '>='");
 			break;
 		}
 	}
 	private void EQ_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 12:
-			System.out.println("201504278 Rule 30");
+			System.out.println("201504278 Rule 30 '=='");
 			break;
 		}
 	}
 	private void NE_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 13:
-			System.out.println("201504278 Rule 31");
+			System.out.println("201504278 Rule 31 '!='");
 			break;
 		}
 	}
 	private void IDENT_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 14:
-			System.out.println("201504278 Rule 32-0");
+			System.out.println("201504278 Rule 32-0 [a-zA-Z_]");
 			break;
 		case 15:
-			System.out.println("201504278 Rule 32-1");
+			System.out.println("201504278 Rule 32-1 ([a-zA-Z])");
 			break;
 		case 16:
-			System.out.println("201504278 Rule 32-2");
+			System.out.println("201504278 Rule 32-2 ([0-9])");
 			break;
 		case 17:
-			System.out.println("201504278 Rule 32-3");
+			System.out.println("201504278 Rule 32-3 ([a-zA-Z]|[0-9])*");
 			break;
 		}
 	}
 	private void LITERAL_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 18:
-			System.out.println("201504278 Rule 33");
+			System.out.println("201504278 Rule 33 Decimal,Octal,Hexaldecimal LITERAL");
 			break;
 		}
 	}
 	private void DecimalConstant_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 19:
-			System.out.println("201504278 Rule 34");
+			System.out.println("201504278 Rule 34 Decimal");
 			break;
 		}
 	}
 	private void OctalConstant_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 20:
-			System.out.println("201504278 Rule 35");
+			System.out.println("201504278 Rule 35 Ocatal");
 			break;
 		}
 	}
 	private void HexadecimalConstant_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 21:
-			System.out.println("201504278 Rule 36");
+			System.out.println("201504278 Rule 36 Hexadecimal");
 			break;
 		}
 	}
 	private void WS_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 22:
-			System.out.println("201504278 Rule 37-0");
+			System.out.println("201504278 Rule 37-0 space");
 			break;
 		case 23:
-			System.out.println("201504278 Rule 37-1");
+			System.out.println("201504278 Rule 37-1 tab");
 			break;
 		case 24:
-			System.out.println("201504278 Rule 37-2");
+			System.out.println("201504278 Rule 37-2 return");
 			break;
 		case 25:
-			System.out.println("201504278 Rule 37-3");
+			System.out.println("201504278 Rule 37-3 carriage return");
 			break;
 		case 26:
-			System.out.println("201504278 Rule 37-4");
+			System.out.println("201504278 Rule 37-4 WS");
 			break;
 		}
 	}
