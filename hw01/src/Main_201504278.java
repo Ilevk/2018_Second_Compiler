@@ -126,7 +126,9 @@ public class Main_201504278 {
 
 }
 
-
+/*
+IntelliJ 기준 Project 폴더
+ */
 class IO_Manager {
     String input_filename = "test.hoo";
     String output_filename = "test.c";

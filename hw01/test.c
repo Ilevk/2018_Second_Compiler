@@ -1,5 +1,6 @@
 #include <stdio.h>
 
 int main(){
-	printf("%s", "UU");
+	printf("%s", "abcabcabc");
+	printf("%s", "\n");
 }
