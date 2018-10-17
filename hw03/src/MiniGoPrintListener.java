@@ -86,10 +86,6 @@ public class MiniGoPrintListener extends MiniGoBaseListener {
             }
         }
 
-        if (isPrefixOperation(ctx)) {
-            newTexts.put(ctx, ctx.getText() + "\n");
-            System.out.print(newTexts.get(ctx));
-        }
     }
 
     @Override
@@ -106,9 +102,6 @@ public class MiniGoPrintListener extends MiniGoBaseListener {
         return ctx.getChildCount() == 3 && ctx.getChild(1) != ctx.expr();
     }
 
-    public boolean isPrefixOperation(MiniGoParser.ExprContext ctx) {
-        return ctx.getChildCount() == 2 && ctx.getChild(0) != ctx.IDENT() && ctx.getChild(0) != ctx.expr();
-    }
 
     @Override
     public void exitFun_decl(MiniGoParser.Fun_declContext ctx) {
