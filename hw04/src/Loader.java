@@ -27,8 +27,11 @@ public class Loader {
 		}
 
 		g.viewGrammar();
+		System.out.println("------------------------");
 		g.findFirst();
+		System.out.println("------------------------");
 		g.findFollow();
+		System.out.println("------------------------");
 
 		RecursiveDescentParser parser = new RecursiveDescentParser(g, "( id * id )");
 	}

@@ -122,7 +122,19 @@ public class Grammar {
 			}
 		}
 		while (!isStable(currentFirst, beforeFirst));
-		int a = 0;
+		for (String sym : currentFirst.keySet()) {
+			System.out.print("first("+sym+") : {");
+			ruleIter = currentFirst.get(sym).iterator();
+			while(ruleIter.hasNext()){
+				System.out.print(ruleIter.next());
+				if(ruleIter.hasNext()){
+					System.out.print(", ");
+				}
+			}
+			System.out.println("}");
+
+
+		}
 	}
 
 
