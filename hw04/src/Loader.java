@@ -17,7 +17,7 @@ public class Loader {
 				String NonTerminal = grammar[0].replaceAll(" ", "");
 				String[] RuleSet = grammar[1].replaceAll(" ", "").split("\\|");
 				for(int i = 0; i < RuleSet.length; i++){
-					g.Listup(RuleSet[i]);
+					g.listup(RuleSet[i]);
 					g.AddRule(NonTerminal, RuleSet[i]);
 				}
 			}
