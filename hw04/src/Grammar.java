@@ -1,19 +1,6 @@
 import java.lang.reflect.Array;
 import java.util.*;
 
-/*
-E  -> TE'
-E' -> +TE' | e
-T  -> FT'
-T' -> *FT' | e
-F  -> (E) | id
-
-E -> a | L
-L -> (Q)
-Q -> LQ'
-Q' -> ,Q | e
-*/
-
 public class Grammar {
 	private HashMap<String, ArrayList<String>> table = new LinkedHashMap<String, ArrayList<String>>();
 	private HashMap<String, ArrayList<String>> first = new HashMap<>();
@@ -119,7 +106,8 @@ public class Grammar {
 							substRule = rule.substring(0, 2);
 						if (!isTerminal(substRule)) {
 							tempSet.addAll(beforeFirst.get(substRule));
-							tempSet.addAll(ringSum(rule.substring(substRule.length())));
+							if (table.get(substRule).contains("e"))
+								tempSet.addAll(ringSum(rule.substring(substRule.length())));
 						}
 					}
 				}
@@ -148,9 +136,11 @@ public class Grammar {
 			substRule = subRule.substring(0, 1);
 			if (subRule.length() > 1 && subRule.charAt(0) == '\'')
 				substRule = subRule.substring(0, 2);
-			if (currentFirst.get(substRule) != null && currentFirst.get(substRule).contains("e")) {
+			if (currentFirst.get(substRule) != null) {
 				result.addAll(currentFirst.get(substRule));
-				result.addAll(ringSum(subRule.substring(substRule.length())));
+				if (currentFirst.get(substRule).contains("e")) {
+					result.addAll(ringSum(subRule.substring(substRule.length())));
+				}
 			}
 		}
 		return result;
@@ -218,8 +208,8 @@ public class Grammar {
 		currentFollow.replace(firstSym, tempSet);
 
 		HashSet<String> emptyList = new HashSet<String>();
-		for(String s : table.keySet()){
-			if(table.get(s).contains("e"))
+		for (String s : table.keySet()) {
+			if (table.get(s).contains("e"))
 				emptyList.add(s);
 		}
 
