@@ -1,25 +1,30 @@
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.*;
 
 /*
+E  -> TE'
+E' -> +TE' | e
+T  -> FT'
+T' -> *FT' | e
+F  -> (E) | id
 
 E -> a | L
 L -> (Q)
 Q -> LQ'
 Q' -> ,Q | e
-
-
 */
 
 public class Grammar {
-	private HashMap<String, ArrayList<String>> table = new HashMap<String, ArrayList<String>>();
+	private HashMap<String, ArrayList<String>> table = new LinkedHashMap<String, ArrayList<String>>();
 	private HashMap<String, ArrayList<String>> first = new HashMap<>();
 	private HashMap<String, ArrayList<String>> follow = new HashMap<>();
+	private HashMap<String, HashSet<String>> beforeFirst = new LinkedHashMap<String, HashSet<String>>(),
+			currentFirst = new LinkedHashMap<String, HashSet<String>>(),
+			beforeFollow = new LinkedHashMap<String, HashSet<String>>(),
+			currentFollow = new LinkedHashMap<String, HashSet<String>>();
 	private ArrayList<String> nonTerminal = new ArrayList<>();
 	private ArrayList<String> terminal = new ArrayList<>();
+	private Iterator<String> ruleIter;
 
 	public HashMap<String, ArrayList<String>> getTable() {
 		return table;
@@ -65,8 +70,6 @@ public class Grammar {
 		String tempNonter, tempRule, substRule;
 		Iterator<String> symbols = table.keySet().iterator(), symbol, ruleIter;
 		HashSet<String> tempSet;
-		HashMap<String, HashSet<String>> beforeFirst = new HashMap<String, HashSet<String>>(),
-				currentFirst = new HashMap<String, HashSet<String>>();
 
 		// Initialize First List
 		while (symbols.hasNext()) {
@@ -97,6 +100,7 @@ public class Grammar {
 				}
 			}
 		}
+
 		do {
 			for (String key : currentFirst.keySet()) {
 				beforeFirst.put(key, currentFirst.get(key));
@@ -105,7 +109,7 @@ public class Grammar {
 			for (String sym : table.keySet()) {
 				ruleIter = table.get(sym).iterator();
 				tempSet = new HashSet<String>();
-				tempSet.addAll(currentFirst.get(sym));
+				tempSet.addAll(beforeFirst.get(sym));
 
 				while (ruleIter.hasNext()) {
 					String rule = ruleIter.next();
@@ -114,32 +118,30 @@ public class Grammar {
 						if (rule.length() > 1 && rule.charAt(1) == '\'')
 							substRule = rule.substring(0, 2);
 						if (!isTerminal(substRule)) {
-							tempSet.addAll(currentFirst.get(substRule));
-							tempSet.addAll(ringSum(currentFirst, rule.substring(substRule.length())));
+							tempSet.addAll(beforeFirst.get(substRule));
+							tempSet.addAll(ringSum(rule.substring(substRule.length())));
 						}
 					}
 				}
-				currentFirst.put(sym,tempSet);
+				currentFirst.put(sym, tempSet);
 			}
 		}
 		while (!isStable(currentFirst, beforeFirst));
 		for (String sym : currentFirst.keySet()) {
-			System.out.print("first("+sym+") : {");
+			System.out.print("first(" + sym + ") : {");
 			ruleIter = currentFirst.get(sym).iterator();
-			while(ruleIter.hasNext()){
+			while (ruleIter.hasNext()) {
 				System.out.print(ruleIter.next());
-				if(ruleIter.hasNext()){
+				if (ruleIter.hasNext()) {
 					System.out.print(", ");
 				}
 			}
 			System.out.println("}");
-
-
 		}
 	}
 
 
-	public HashSet<String> ringSum(HashMap<String, HashSet<String>> currentFirst, String subRule) {
+	public HashSet<String> ringSum(String subRule) {
 		HashSet<String> result = new HashSet<String>();
 		String substRule;
 		if (subRule.length() > 0) {
@@ -148,20 +150,21 @@ public class Grammar {
 				substRule = subRule.substring(0, 2);
 			if (currentFirst.get(substRule) != null && currentFirst.get(substRule).contains("e")) {
 				result.addAll(currentFirst.get(substRule));
-				result.addAll(ringSum(currentFirst, subRule.substring(substRule.length())));
+				result.addAll(ringSum(subRule.substring(substRule.length())));
 			}
 		}
 		return result;
 	}
 
 
-	public boolean isStable(HashMap<String, HashSet<String>> currentFirst, HashMap<String, HashSet<String>> beforeFirst) {
+	public boolean isStable(HashMap<String, HashSet<String>> current,
+							HashMap<String, HashSet<String>> before) {
 		String key;
-		Iterator<String> keys = currentFirst.keySet().iterator();
+		Iterator<String> keys = current.keySet().iterator();
 
 		while (keys.hasNext()) {
 			key = keys.next();
-			if (currentFirst.get(key).size() != beforeFirst.get(key).size()) {
+			if (current.get(key).size() != before.get(key).size()) {
 				return false;
 			}
 		}
@@ -169,8 +172,101 @@ public class Grammar {
 	}
 
 	public void findFollow() {
+		//Assume First Already found
+		boolean isFirst = true;
+		String firstSym = new String();
+		String[] tempStrArr;
+		HashSet<String> tempSet;
+		Iterator<String> symbols = table.keySet().iterator();
 
+		//Init follow by first
+		while (symbols.hasNext()) {
+			String tempSym = symbols.next();
+			if (isFirst) {
+				firstSym = tempSym;
+				isFirst = false;
+			}
+			tempSet = new HashSet<String>();
+			for (String s : table.keySet()) {
+				for (String r : table.get(s)) {
+					if (r.contains(tempSym)) {
+						tempStrArr = r.split(tempSym);
+						if (tempStrArr.length > 1 && tempStrArr[1].charAt(0) != '\'') {
+							String ttSym = tempStrArr[1].substring(0, 1);
+							if (isTerminal(ttSym) && !ttSym.equals("e")) {
+								tempSet.add(ttSym);
+							} else {
+								if (tempStrArr[1].length() > 1 && tempStrArr[1].charAt(1) == '\'') {
+									ttSym = tempStrArr[1].substring(0, 2);
+									HashSet<String> ttSet = currentFirst.get(ttSym);
+									if (ttSet.contains("e"))
+										ttSet.remove("e");
+									tempSet.addAll(ttSet);
+								}
+							}
+						}
+					}
+				}
+			}
+			currentFollow.put(tempSym, tempSet);
+		}
+		if (currentFollow.get(firstSym) == null) {
+			currentFollow.put(firstSym, new HashSet<String>());
+		}
+		tempSet = currentFollow.get(firstSym);
+		tempSet.add("$");
+		currentFollow.replace(firstSym, tempSet);
+
+		HashSet<String> emptyList = new HashSet<String>();
+		for(String s : table.keySet()){
+			if(table.get(s).contains("e"))
+				emptyList.add(s);
+		}
+
+		do {
+			symbols = table.keySet().iterator();
+			for (String key : currentFollow.keySet()) {
+				beforeFollow.put(key, currentFollow.get(key));
+			}
+
+
+			while (symbols.hasNext()) {
+				String tempSym = symbols.next();
+				tempSet = new HashSet<String>();
+				for (String s : table.keySet()) {
+					for (String r : table.get(s)) {
+						if (r.contains(tempSym)) {
+							if (tempSym.equals(r.substring(r.length() - tempSym.length(), r.length())))
+								tempSet.addAll(beforeFollow.get(s));
+						}
+						for (String e : emptyList) {
+							String nullableR = r.replace(e, "");
+							if (nullableR.contains(tempSym)) {
+								if (tempSym.equals(nullableR.substring(nullableR.length() - tempSym.length(), nullableR.length())))
+									tempSet.addAll(beforeFollow.get(s));
+							}
+						}
+					}
+				}
+				tempSet.addAll(currentFollow.get(tempSym));
+				currentFollow.put(tempSym, tempSet);
+			}
+
+		} while (!isStable(currentFollow, beforeFollow));
+
+		for (String sym : currentFollow.keySet()) {
+			System.out.print("follow(" + sym + ") : {");
+			ruleIter = currentFollow.get(sym).iterator();
+			while (ruleIter.hasNext()) {
+				System.out.print(ruleIter.next());
+				if (ruleIter.hasNext()) {
+					System.out.print(", ");
+				}
+			}
+			System.out.println("}");
+		}
 	}
+
 
 	public void viewGrammar() {
 		int index = 1;
