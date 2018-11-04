@@ -43,6 +43,7 @@ public class Grammar {
 	}
 
 	public void AddRule(String nonterminal, String rule) {
+		this.listup(rule);
 		if (table.get(nonterminal) == null) {
 			ArrayList<String> list = new ArrayList<String>();
 			list.add(rule);
